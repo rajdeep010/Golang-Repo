@@ -17,6 +17,7 @@ func main() {
 }
 
 // note: first letter is capital
+// so we can export it, else not
 type User struct {
 	Name   string
 	Email  string
