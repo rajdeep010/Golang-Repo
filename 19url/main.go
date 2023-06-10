@@ -24,8 +24,10 @@ func main() {
 	// fmt.Println(result.Host)	// lco.dev:3000
 	// fmt.Println(result.Path)	// /learn
 	// fmt.Println(result.Port())	// 3000
+
 	fmt.Println(result.RawQuery)	// course=reactjs&paymentid=akcny8aeba42fjjb
 
+	
 	qparams := result.Query()
 	fmt.Printf("The type of query params are : %T\n", qparams)	// url.Values  (kind of key values)
 
