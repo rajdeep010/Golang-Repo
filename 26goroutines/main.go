@@ -6,7 +6,11 @@ import (
 	"sync"
 )
 
+var signals = []string{"test"}
+
 var wg sync.WaitGroup // pointers
+
+var mut sync.Mutex // pointers
 
 func main() {
 
@@ -24,6 +28,7 @@ func main() {
 	// not waiting in the main method for all the go routines to comeback and report
 	// we are terminating the main before that
 	// we will use sync package
+
 	for _, web := range websitelist {
 		go getStatusCode(web)
 
@@ -62,9 +67,14 @@ func getStatusCode(endpoint string) {
 
 	if err != nil {
 		fmt.Println("Oops in endpoints")
-	}
+	}else{
+		mut.Lock()
+		signals = append(signals, endpoint)		
+		mut.Unlock()
+		
+		fmt.Printf("%d status code for %s\n", res.StatusCode, endpoint)
 
-	fmt.Printf("%d status code for %s\n", res.StatusCode, endpoint)
+	}
 }
 
 /*
